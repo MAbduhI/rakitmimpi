@@ -4,14 +4,14 @@
   "description": "Rakitmimpi UI — React component library built on Tailwind CSS",
   "license": "MIT",
   "author": "Abduh Ichsan <abduhikhsan1@gmail.com>",
-  "homepage": "https://github.com/MAbduhI/rakit-ui#readme",
+  "homepage": "https://github.com/MAbduhI/rakitmimpi#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MAbduhI/rakit-ui.git",
+    "url": "git+https://github.com/MAbduhI/rakitmimpi.git",
     "directory": "packages/ui"
   },
   "bugs": {
-    "url": "https://github.com/MAbduhI/rakit-ui/issues"
+    "url": "https://github.com/MAbduhI/rakitmimpi/issues"
   },
   "keywords": [
     "react",

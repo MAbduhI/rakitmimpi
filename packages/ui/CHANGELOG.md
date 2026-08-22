@@ -31,4 +31,4 @@ Initial public release.
 - Dual ESM + CJS builds with TypeScript declarations; `react` / `react-dom` are
   peer dependencies, `leaflet` an optional peer.
 
-[0.1.0]: https://github.com/MAbduhI/rakit-ui/releases/tag/v0.1.0
+[0.1.0]: https://github.com/MAbduhI/rakitmimpi/releases/tag/v0.1.0

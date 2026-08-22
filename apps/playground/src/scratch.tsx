@@ -1,6 +1,6 @@
-import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input } from "@rakit-ui/ui";
+import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input } from "@rakitmimpi/ui";
 import { useState } from "react";
-import { Section } from "./app";
+import { Section } from "./section";
 
 /**
  * Your scratch space — this file exists to be rewritten.

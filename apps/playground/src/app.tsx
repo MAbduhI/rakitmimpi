@@ -1,4 +1,4 @@
-import { Button, useTheme } from "@rakitmimpi-ui/ui";
+import { Button, useTheme } from "@rakitmimpi/ui";
 import { Scratch } from "./scratch";
 import { Showcase } from "./showcase";
 

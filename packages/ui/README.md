@@ -1,11 +1,11 @@
-# @rakitmimpi-ui/ui
+# @rakitmimpi/ui
 
 React component library built on [Tailwind CSS v4](https://tailwindcss.com). Token-themed (light/dark), tree-shakeable, ships ESM + CJS + types.
 
 ## Install
 
 ```bash
-pnpm add @rakitmimpi-ui/ui
+pnpm add @rakitmimpi/ui
 # peers: react, react-dom (>=18)
 ```
 
@@ -15,8 +15,8 @@ The library ships uncompiled Tailwind utility classes plus design tokens in `sty
 
 ```css
 @import "tailwindcss";
-@import "@rakitmimpi-ui/ui/styles.css";
-@source "../node_modules/@rakitmimpi-ui/ui/dist";
+@import "@rakitmimpi/ui/styles.css";
+@source "../node_modules/@rakitmimpi/ui/dist";
 ```
 
 > Adjust the `@source` path so it is relative to that CSS file. Tailwind does not scan `node_modules` by default, so this line is required for the component classes to be generated.
@@ -32,7 +32,7 @@ import {
   CardHeader,
   CardTitle,
   Input,
-} from "@rakitmimpi-ui/ui";
+} from "@rakitmimpi/ui";
 
 export function Example() {
   return (
@@ -53,7 +53,7 @@ export function Example() {
 
 Also exported: `cn()` — the `clsx` + `tailwind-merge` class helper.
 
-## Maps (`@rakitmimpi-ui/ui/maps`)
+## Maps (`@rakitmimpi/ui/maps`)
 
 `Maps` pulls in [Leaflet](https://leafletjs.com), so it lives at a separate entry point to keep Leaflet out of the root bundle. Add Leaflet yourself (optional peer dependency):
 
@@ -62,7 +62,7 @@ pnpm add leaflet
 ```
 
 ```tsx
-import { Maps, type CustomTileLayer } from "@rakitmimpi-ui/ui/maps";
+import { Maps, type CustomTileLayer } from "@rakitmimpi/ui/maps";
 
 const customLayers: Array<CustomTileLayer> = [
   {

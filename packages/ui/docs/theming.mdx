@@ -112,7 +112,7 @@ Dark applies when either is true:
 `data-theme` is the only contract. Set it however you like, or use the hook.
 
 ```tsx
-import { useTheme } from "@rakitmimpi-ui/ui";
+import { useTheme } from "@rakitmimpi/ui";
 
 function ThemeToggle() {
   const { resolvedTheme, toggleTheme } = useTheme();
@@ -145,7 +145,7 @@ React applies the theme after hydration, which is one paint too late. Drop the
 exported `themeScript` into `<head>` as a blocking script:
 
 ```tsx
-import { themeScript } from "@rakitmimpi-ui/ui";
+import { themeScript } from "@rakitmimpi/ui";
 
 // biome-ignore lint/security/noDangerouslySetInnerHtml: must run before paint
 <script dangerouslySetInnerHTML={{ __html: themeScript }} />;
@@ -416,8 +416,8 @@ stylesheet. Override both themes or you will only fix one:
 
 ```css
 @import "tailwindcss";
-@import "@rakitmimpi-ui/ui/styles.css";
-@source "../node_modules/@rakitmimpi-ui/ui/dist";
+@import "@rakitmimpi/ui/styles.css";
+@source "../node_modules/@rakitmimpi/ui/dist";
 
 @theme {
   --color-accent: #1f6f4a; /* light */

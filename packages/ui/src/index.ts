@@ -1,4 +1,49 @@
 export {
+  cubicBezier,
+  type EasingFunction,
+  easings,
+  resolveEasing,
+  type SpringOptions,
+  spring,
+  steps,
+} from "./animation/easing";
+export {
+  useAnimate,
+  useInViewAnimate,
+  useSpring,
+  useTimeline,
+} from "./animation/hooks";
+export {
+  type StaggerFunction,
+  type StaggerOptions,
+  stagger,
+} from "./animation/stagger";
+export { type MotionPoint, motionPath, setDashoffset } from "./animation/svg";
+export {
+  createTimeline,
+  Timeline as AnimationTimeline,
+  type TimelineParams as AnimationTimelineParams,
+} from "./animation/timeline";
+// ─── ANIMATION ENGINE & MOTION PRIMITIVES (ANIME.JS PARITY) ──────────────────
+export {
+  AnimationInstance,
+  type AnimationParams,
+  type AnimationTarget,
+  animate,
+} from "./animation/tween";
+export {
+  getPresetVariant,
+  type MotionProperties,
+  type MotionVariant,
+  motionPresets,
+  type PresetName,
+  type TransitionConfig,
+} from "./animation/variants";
+export {
+  AnimateNumber,
+  type AnimateNumberProps,
+} from "./components/Atom/animate-number";
+export {
   Avatar,
   AvatarGroup,
   type AvatarGroupProps,
@@ -31,6 +76,14 @@ export { Input, type InputProps } from "./components/Atom/input";
 export { Kbd, type KbdProps } from "./components/Atom/kbd";
 export { Label, type LabelProps } from "./components/Atom/label";
 export { Loading, type LoadingProps, type LoadingVariant } from "./components/Atom/loading";
+export { Magnetic, type MagneticProps } from "./components/Atom/magnetic";
+// Atoms & Molecules
+export {
+  Motion,
+  type MotionBaseProps,
+  MotionComponent,
+  type MotionProps,
+} from "./components/Atom/motion";
 export {
   getPageRange,
   type PageSlot,
@@ -50,9 +103,14 @@ export { Radio, RadioGroup, type RadioGroupProps, type RadioProps, type RadioSiz
 export { ScrollArea, type ScrollAreaProps } from "./components/Atom/scroll-area";
 export { Select, type SelectOption, type SelectProps } from "./components/Atom/select";
 export { Skeleton, type SkeletonProps } from "./components/Atom/skeleton";
+export { SvgDraw, type SvgDrawProps } from "./components/Atom/svg-draw";
 export { Switch, type SwitchProps, type SwitchSize } from "./components/Atom/switch";
 export { Textarea, type TextareaProps } from "./components/Atom/textarea";
 export { Alert, type AlertProps, type AlertVariant } from "./components/Molecule/alert";
+export {
+  AnimatePresence,
+  type AnimatePresenceProps,
+} from "./components/Molecule/animate-presence";
 export { Breadcrumb, type BreadcrumbItem, type BreadcrumbProps } from "./components/Molecule/breadcrumb";
 export {
   addMonths,
@@ -107,6 +165,10 @@ export {
   type RunBannerProps,
   type RunBannerSize,
 } from "./components/Molecule/run-banner";
+export {
+  StaggerList,
+  type StaggerListProps,
+} from "./components/Molecule/stagger-list";
 export {
   Tab,
   type TabProps,

@@ -1,4 +1,6 @@
 import {
+  AnimateNumber,
+  AnimatePresence,
   Badge,
   type BadgeProps,
   Button,
@@ -27,10 +29,15 @@ import {
   iconNames,
   Loading,
   type LoadingProps,
+  Magnetic,
+  Motion,
   Pagination,
+  type PresetName,
   Progress,
   RunBanner,
   Skeleton,
+  StaggerList,
+  SvgDraw,
   Tab,
   Tabs,
   type TabsProps,
@@ -774,6 +781,166 @@ export function Showcase() {
           </CardFooter>
         </Card>
       </Section>
+
+      {/* ─── ANIMATION & MOTION PRIMITIVES SHOWCASE ─── */}
+      <Section
+        title="Animation Engine & Motion Primitives (Anime.js Parity)"
+        description="Zero-dependency 60/120fps physics, hardware 3D transforms, SVG tracing, staggers, and rich variants."
+      >
+        <AnimationDemo />
+      </Section>
     </>
+  );
+}
+
+function AnimationDemo() {
+  const [selectedPreset, setSelectedPreset] = useState<PresetName>("fade-up");
+  const [animKey, setAnimKey] = useState(0);
+  const [counterVal, setCounterVal] = useState(1250000);
+  const [showPresence, setShowPresence] = useState(true);
+
+  const presets: Array<PresetName> = ["fade-up", "pop", "elastic-up", "flip-x", "blur-in", "float", "pulse", "shake"];
+
+  return (
+    <div className="flex flex-col gap-8">
+      {/* 1. Preset Variants Explorer */}
+      <div className="flex flex-col gap-4">
+        <h4 className="font-bold text-primary text-sm">1. Rich Motion Presets</h4>
+        <div className="flex flex-wrap gap-2">
+          {presets.map((p) => (
+            <Button
+              key={p}
+              size="sm"
+              variant={selectedPreset === p ? "primary" : "outline"}
+              onClick={() => {
+                setSelectedPreset(p);
+                setAnimKey((k) => k + 1);
+              }}
+            >
+              {p}
+            </Button>
+          ))}
+          <Button size="sm" variant="ghost" onClick={() => setAnimKey((k) => k + 1)}>
+            ↻ Re-trigger
+          </Button>
+        </div>
+
+        <div className="flex h-36 items-center justify-center rounded-xl border border-border bg-surface-alt p-6">
+          <Motion.div
+            key={`${selectedPreset}-${animKey}`}
+            preset={selectedPreset}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="cursor-pointer rounded-xl bg-accent px-8 py-4 font-bold text-accent-foreground shadow-md"
+          >
+            Active Preset: {selectedPreset}
+          </Motion.div>
+        </div>
+      </div>
+
+      {/* 2. Magnetic Button & Interactive Springs */}
+      <div className="flex flex-col gap-4">
+        <h4 className="font-bold text-primary text-sm">2. Magnetic Cursor Tracking & Spring Physics</h4>
+        <div className="flex items-center gap-6 rounded-xl border border-border bg-surface p-6">
+          <Magnetic strength={0.4}>
+            <Button variant="primary" size="lg" className="shadow-lg">
+              🧲 Magnetic Pull Me
+            </Button>
+          </Magnetic>
+          <Magnetic strength={0.6}>
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-accent font-bold text-accent-foreground shadow-md">
+              🎯
+            </div>
+          </Magnetic>
+          <p className="text-secondary text-xs">
+            Smoothly pulls toward mouse coordinates and snaps back using elastic harmonic oscillation.
+          </p>
+        </div>
+      </div>
+
+      {/* 3. Tabular Animated Counter & SVG Drawing */}
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="flex flex-col gap-3 rounded-xl border border-border bg-surface p-6">
+          <h4 className="font-bold text-primary text-sm">3. Tabular AnimateNumber Counter</h4>
+          <div className="flex items-baseline gap-2">
+            <span className="text-secondary text-sm">Revenue:</span>
+            <AnimateNumber
+              value={counterVal}
+              from={0}
+              duration={1500}
+              format={(v) => `Rp ${Math.round(v).toLocaleString("id-ID")}`}
+              className="font-black text-2xl text-primary"
+            />
+          </div>
+          <div className="flex gap-2 pt-2">
+            <Button size="sm" onClick={() => setCounterVal((v) => v + 500000)}>
+              + Rp 500.000
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => setCounterVal((v) => Math.max(0, v - 300000))}>
+              - Rp 300.000
+            </Button>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-3 rounded-xl border border-border bg-surface p-6">
+          <h4 className="font-bold text-primary text-sm">4. SVG Path Tracing (setDashoffset)</h4>
+          <div className="flex items-center justify-around py-2">
+            <SvgDraw
+              path="M 20 50 L 40 70 L 80 30"
+              stroke="#10B981"
+              strokeWidth={4}
+              duration={1500}
+              className="h-16 w-16"
+            />
+            <SvgDraw
+              path="M 50,30 A 20,20 0,0,0 10,50 C 10,70 50,90 50,90 C 50,90 90,70 90,50 A 20,20 0,0,0 50,30 Z"
+              stroke="#EF4444"
+              strokeWidth={3}
+              duration={1800}
+              className="h-16 w-16"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* 4. Staggered List & AnimatePresence */}
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="flex flex-col gap-3 rounded-xl border border-border bg-surface p-6">
+          <h4 className="font-bold text-primary text-sm">5. StaggerList (Cascade Entry)</h4>
+          <StaggerList staggerDelay={60}>
+            {["⚡ High Throughput Pipeline", "🛡️ Zero Hardcoded Secrets", "📦 Micro-frontend Ready"].map((txt) => (
+              <Motion.div
+                key={txt}
+                preset="fade-up"
+                className="rounded-lg border border-border bg-surface-alt p-2.5 font-medium text-primary text-xs shadow-2xs"
+              >
+                {txt}
+              </Motion.div>
+            ))}
+          </StaggerList>
+        </div>
+
+        <div className="flex flex-col gap-3 rounded-xl border border-border bg-surface p-6">
+          <h4 className="font-bold text-primary text-sm">6. AnimatePresence (Exit Transitions)</h4>
+          <Button size="sm" variant="outline" onClick={() => setShowPresence(!showPresence)}>
+            {showPresence ? "Unmount Box" : "Mount Box"}
+          </Button>
+          <div className="flex h-20 items-center justify-center">
+            <AnimatePresence>
+              {showPresence && (
+                <Motion.div
+                  key="presence-demo"
+                  preset="pop"
+                  exit={{ opacity: 0, scale: 0.75 }}
+                  className="rounded-lg bg-accent px-4 py-2 font-bold text-accent-foreground text-xs shadow-sm"
+                >
+                  Unmounting with smooth exit transition
+                </Motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

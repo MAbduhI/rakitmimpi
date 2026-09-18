@@ -12,6 +12,8 @@ import {
   CardHeader,
   CardTitle,
   Carousel,
+  ComboBox,
+  type ComboBoxOption,
   Dialog,
   DialogBody,
   DialogContent,
@@ -47,6 +49,16 @@ import {
 import { type CustomTileLayer, Maps, type MarkerInput, type PolylineInput } from "@rakitmimpi/ui/maps";
 import { useState } from "react";
 import { Section } from "./section";
+
+const comboboxFrameworkOptions: Array<ComboBoxOption> = [
+  { value: "next", label: "Next.js" },
+  { value: "react", label: "React" },
+  { value: "vue", label: "Vue.js" },
+  { value: "svelte", label: "Svelte" },
+  { value: "angular", label: "Angular", disabled: true },
+  { value: "remix", label: "Remix" },
+  { value: "astro", label: "Astro" },
+];
 
 const buttonVariants: Array<NonNullable<ButtonProps["variant"]>> = [
   "primary",
@@ -215,6 +227,8 @@ export function Showcase() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [progress, setProgress] = useState(60);
   const [page, setPage] = useState(1);
+  const [singleCombo, setSingleCombo] = useState<string>("next");
+  const [multiCombo, setMultiCombo] = useState<string | Array<string>>(["next", "react"]);
 
   return (
     <>
@@ -333,6 +347,33 @@ export function Showcase() {
           <Input placeholder="Pick a date" rightIcon="calendar" />
           <Input defaultValue="INV-1041" leftIcon="search" rightIcon="x" />
           <Input disabled leftIcon="user" placeholder="Disabled — icon dims too" />
+        </div>
+      </Section>
+
+      <Section
+        title="ComboBox — single & multi-select"
+        description="Searchable dropdown with tag chips, filter-as-you-type, and clear actions."
+      >
+        <div className="grid w-full max-w-2xl grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="flex flex-col gap-2">
+            <span className="font-medium text-secondary text-xs">Single Selection:</span>
+            <ComboBox
+              options={comboboxFrameworkOptions}
+              value={singleCombo}
+              onChange={(val) => setSingleCombo(val as string)}
+              placeholder="Select a framework..."
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <span className="font-medium text-secondary text-xs">Multi Selection (Tags):</span>
+            <ComboBox
+              multiple
+              options={comboboxFrameworkOptions}
+              value={multiCombo}
+              onChange={setMultiCombo}
+              placeholder="Select multiple frameworks..."
+            />
+          </div>
         </div>
       </Section>
 

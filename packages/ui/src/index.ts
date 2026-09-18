@@ -142,6 +142,7 @@ export {
   type CollapseItem,
   type CollapseProps,
 } from "./components/Molecule/collapse";
+export * from "./components/Molecule/combobox";
 export { EmptyState, type EmptyStateProps } from "./components/Molecule/empty-state";
 export {
   Progress,

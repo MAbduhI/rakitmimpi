@@ -72,7 +72,7 @@ export const Controlled: Story = {
         </ResizeContainer>
         <div className="flex gap-2">
           <button
-            className="rounded-md border border-border px-3 py-1 text-sm"
+            className="rounded-sm border border-border px-3 py-1 text-sm"
             onClick={() => setSizes([50, 50])}
             type="button"
           >

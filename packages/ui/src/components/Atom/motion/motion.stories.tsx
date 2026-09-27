@@ -17,7 +17,7 @@ export const FadeUp: Story = {
   args: {
     preset: "fade-up",
     children: (
-      <div className="rounded-xl border border-border bg-surface p-6 shadow-sm">
+      <div className="rounded-md border border-border bg-surface p-6 shadow-sm">
         <h3 className="font-bold text-lg text-primary">Fade Up Preset</h3>
         <p className="text-secondary text-sm">Buttery smooth spring & cubic motion.</p>
       </div>
@@ -31,7 +31,7 @@ export const PopAndHover: Story = {
     whileHover: { scale: 1.05 },
     whileTap: { scale: 0.95 },
     children: (
-      <div className="cursor-pointer rounded-xl bg-accent px-6 py-3 font-semibold text-accent-foreground shadow-md">
+      <div className="cursor-pointer rounded-sm bg-accent px-6 py-3 font-semibold text-accent-foreground shadow-md">
         Hover / Tap Me
       </div>
     ),
@@ -42,7 +42,7 @@ export const ElasticBounce: Story = {
   args: {
     preset: "elastic-up",
     children: (
-      <div className="rounded-xl border border-border bg-surface p-6 shadow-sm">
+      <div className="rounded-md border border-border bg-surface p-6 shadow-sm">
         <span className="font-bold text-primary">Elastic Overshoot</span>
       </div>
     ),

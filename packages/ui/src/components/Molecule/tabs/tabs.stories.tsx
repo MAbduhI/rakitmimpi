@@ -173,7 +173,7 @@ export const CustomTrigger: Story = {
     children: basic,
     renderTrigger: (tab, state) => (
       <button
-        className={`w-full rounded-md border px-4 py-2 text-left text-sm transition-colors ${
+        className={`w-full rounded-sm border px-4 py-2 text-left text-sm transition-colors ${
           state.active
             ? "border-accent bg-accent text-accent-foreground"
             : "border-border bg-surface text-secondary hover:bg-surface-alt"
@@ -195,7 +195,7 @@ export const CustomTriggerVertical: Story = {
     orientation: "vertical",
     renderTrigger: (tab, state) => (
       <button
-        className={`flex w-40 items-center gap-2 rounded-md px-3 py-2 text-left text-sm transition-colors ${
+        className={`flex w-40 items-center gap-2 rounded-sm px-3 py-2 text-left text-sm transition-colors ${
           state.active ? "bg-accent-secondary text-accent-secondary-foreground" : "text-secondary hover:bg-surface-alt"
         }`}
         onClick={state.select}

@@ -29,7 +29,7 @@ export const TogglePresence: Story = {
                 key="box"
                 preset="pop"
                 exit={{ opacity: 0, scale: 0.8 }}
-                className="rounded-xl bg-accent px-6 py-4 font-bold text-accent-foreground shadow-md"
+                className="rounded-sm bg-accent px-6 py-4 font-bold text-accent-foreground shadow-md"
               >
                 Dismissable Element
               </Motion.div>

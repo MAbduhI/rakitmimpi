@@ -9,6 +9,7 @@ const avatarVariants = cva(
   {
     variants: {
       size: {
+        xs: "size-5 text-[9px]",
         sm: "size-6 text-[10px]",
         md: "size-8 text-xs",
         lg: "size-10 text-sm",
@@ -19,6 +20,7 @@ const avatarVariants = cva(
       shape: {
         circle: "rounded-full",
         square: "rounded-md",
+        rounded: "rounded-lg",
       },
     },
     defaultVariants: {
@@ -52,12 +54,14 @@ export interface AvatarProps
     VariantProps<typeof avatarVariants> {
   src?: string;
   alt?: string;
-  /** Initials fallback, shown when there is no `src` or the image fails. */
+  /** Initials fallback, shown when there is no src or the image fails. */
   name?: string;
   status?: AvatarStatus;
+  /** Badge text or number overlay (e.g. unread count or symbol badge) */
+  badge?: string | number;
 }
 
-export function Avatar({ src, alt, name, size, shape, status, className, children, ...props }: AvatarProps) {
+export function Avatar({ src, alt, name, size, shape, status, badge, className, children, ...props }: AvatarProps) {
   const [failed, setFailed] = useState(false);
   const showImage = Boolean(src) && !failed;
 
@@ -67,8 +71,6 @@ export function Avatar({ src, alt, name, size, shape, status, className, childre
         <img
           alt={alt ?? name ?? ""}
           className="size-full object-cover"
-          // A broken URL falls through to the initials rather than to a broken
-          // image icon.
           onError={() => setFailed(true)}
           src={src}
         />
@@ -82,6 +84,11 @@ export function Avatar({ src, alt, name, size, shape, status, className, childre
           role="status"
         />
       ) : null}
+      {badge !== undefined && (
+        <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-error px-1 text-[10px] font-bold text-error-foreground ring-2 ring-surface">
+          {badge}
+        </span>
+      )}
     </span>
   );
 }
@@ -90,21 +97,45 @@ export interface AvatarGroupProps extends HTMLAttributes<HTMLDivElement> {
   /** Avatars past this count collapse into a "+N" chip. */
   max?: number;
   size?: AvatarProps["size"];
+  /** Hover expand effect (Metronic symbol-hover / Creative Tim stack) */
+  hoverExpand?: boolean;
 }
 
-export function AvatarGroup({ max, size, className, children, ...props }: AvatarGroupProps) {
+export function AvatarGroup({ max, size = "md", hoverExpand = false, className, children, ...props }: AvatarGroupProps) {
   const avatars = Children.toArray(children).filter(isValidElement);
   const visible = max !== undefined && max < avatars.length ? avatars.slice(0, max) : avatars;
   const overflow = avatars.length - visible.length;
 
   return (
-    <div className={cn("flex items-center -space-x-2", className)} {...props}>
-      {visible}
-      {overflow > 0 ? (
-        <Avatar className="ring-2 ring-surface" name={`+${overflow}`} size={size}>
+    <div
+      className={cn(
+        "flex items-center -space-x-2.5",
+        hoverExpand && "hover:space-x-1 transition-all duration-200",
+        className
+      )}
+      {...props}
+    >
+      {visible.map((avatar, i) => (
+        <div
+          key={i}
+          className={cn(
+            "relative ring-2 ring-surface rounded-full transition-transform duration-200 hover:z-10 hover:scale-110",
+            hoverExpand && "hover:translate-y-[-2px]"
+          )}
+        >
+          {avatar}
+        </div>
+      ))}
+      {overflow > 0 && (
+        <span
+          className={cn(
+            avatarVariants({ size, shape: "circle" }),
+            "relative ring-2 ring-surface bg-surface-hover font-semibold text-secondary text-xs",
+          )}
+        >
           +{overflow}
-        </Avatar>
-      ) : null}
+        </span>
+      )}
     </div>
   );
 }

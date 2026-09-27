@@ -21,7 +21,7 @@ export const LinearStagger: Story = {
         <Motion.div
           key={text}
           preset="fade-up"
-          className="rounded-lg border border-border bg-surface p-3 font-medium text-primary shadow-xs"
+          className="rounded-md border border-border bg-surface p-3 font-medium text-primary shadow-xs"
         >
           {text}
         </Motion.div>

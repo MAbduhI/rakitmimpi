@@ -277,3 +277,38 @@ export {
 } from "./theme";
 export { cn } from "./utils/cn";
 export { type DebouncedFunction, debounce } from "./utils/debouncer";
+
+// ─── ENTERPRISE HR & DASHBOARD SUITE (SMARTHR / HRNEXUS) ───────────────────
+export { MetricStatCard, type MetricStatCardProps, type MetricStatVariant } from "./components/Molecule/metric-stat-card";
+export { PunctualityDonut, type PunctualityDonutProps } from "./components/Molecule/punctuality-donut";
+export { WorkTimerCard, type WorkTimerCardProps } from "./components/Molecule/work-timer-card";
+export { LeaveBalanceCard, type LeaveBalanceCardProps, type LeaveItemBalance } from "./components/Molecule/leave-balance-card";
+export { NineBoxMatrix, type NineBoxMatrixProps, type NineBoxEmployee } from "./components/Organism/NineBoxMatrix";
+export { OrgChartTree, type OrgChartTreeProps, type OrgNode } from "./components/Organism/OrgChartTree";
+export { NotesWorkspace, type NotesWorkspaceProps, type NoteItem } from "./components/Organism/notes-workspace";
+export { PendingApprovalsCard, type PendingApprovalsCardProps, type PendingApprovalItem, type ApprovalType } from "./components/Molecule/pending-approvals-card";
+export { UpcomingEventsCard, type UpcomingEventsCardProps, type ScheduleEventItem, type EventCategory } from "./components/Molecule/upcoming-events-card";
+export { EmployeeDistributionCard, type EmployeeDistributionCardProps, type StatusSegment, type DepartmentShare } from "./components/Molecule/employee-distribution-card";
+
+// ─── NEW TEMPLATE ENRICHMENT COMPONENTS ──────────────────────────────────────
+export { Rating, type RatingProps } from "./components/Atom/rating";
+export {
+  SegmentedControl,
+  type SegmentedControlProps,
+  type SegmentedControlOption,
+} from "./components/Atom/segmented-control";
+export { Dropzone, type DropzoneProps } from "./components/Molecule/dropzone";
+export {
+  FilterChips,
+  type FilterChipsProps,
+  type FilterChipItem,
+} from "./components/Molecule/filter-chips";
+export {
+  StatWidget,
+  type StatWidgetProps,
+} from "./components/Molecule/stat-widget";
+export {
+  Stepper,
+  type StepperProps,
+  type StepItem,
+} from "./components/Organism/stepper";

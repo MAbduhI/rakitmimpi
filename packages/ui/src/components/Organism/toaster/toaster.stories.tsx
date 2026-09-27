@@ -194,7 +194,7 @@ function FancyDemo() {
               <span className="font-semibold">Rakit Mimpi</span> mentioned you in{" "}
               <span className="font-semibold">INV-1043</span>
             </p>
-            <p className="rounded-md border-accent border-l-2 bg-surface-alt px-3 py-2 text-secondary text-xs">
+            <p className="rounded-sm border-accent border-l-2 bg-surface-alt px-3 py-2 text-secondary text-xs">
               “Can you confirm the delivery window before we invoice?”
             </p>
             <div className="flex gap-2">

@@ -11,6 +11,7 @@ const cardVariants = cva("rounded-md text-primary transition-all", {
       elevated: "border border-border/50 bg-surface shadow-md hover:shadow-lg",
       dashed: "border border-dashed border-border bg-surface shadow-none",
       stretched: "h-full flex flex-col border border-border bg-surface shadow-xs",
+      panel: "border border-border bg-card text-foreground rounded-sm shadow-none",
     },
     padding: {
       none: "p-0",

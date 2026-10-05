@@ -11,6 +11,8 @@ export interface SelectOption {
   icon?: ReactNode;
 }
 
+export type CustomSelectOption = SelectOption;
+
 export interface CustomSelectProps {
   value?: string;
   onChange: (value: string) => void;

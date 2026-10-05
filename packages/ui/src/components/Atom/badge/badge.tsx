@@ -18,6 +18,7 @@ const badgeVariants = cva(
         pill: "rounded-full",
         rounded: "rounded-md",
         square: "rounded-none",
+        sm: "rounded-sm",
         circle: "size-5 p-0 justify-center rounded-full text-[10px] aspect-square",
       },
     },

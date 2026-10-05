@@ -21,6 +21,8 @@ const buttonVariants = cva(
         link: "text-accent underline-offset-4 hover:underline p-0 h-auto font-normal",
         dashed: "border border-dashed border-input bg-transparent text-primary hover:bg-surface-alt/100 active:bg-surface-alt/80",
         flush: "border-0 bg-transparent text-primary p-0 h-auto hover:text-accent",
+        vermilion: "bg-[var(--primary,#e2411b)] text-[var(--primary-foreground,#fff8f3)] hover:opacity-90 active:opacity-95 font-semibold rounded-sm shadow-xs border-0",
+        "swiss-secondary": "border border-border bg-card text-foreground hover:bg-muted active:bg-muted/80 rounded-sm font-medium shadow-none",
       },
       size: {
         xs: "h-7 px-2.5 text-xs rounded-sm",
@@ -35,6 +37,7 @@ const buttonVariants = cva(
         default: "rounded-md",
         rounded: "rounded-full",
         square: "rounded-none",
+        sm: "rounded-sm",
       },
     },
     defaultVariants: {

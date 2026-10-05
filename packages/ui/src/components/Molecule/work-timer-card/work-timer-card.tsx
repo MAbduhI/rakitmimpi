@@ -85,7 +85,7 @@ export function WorkTimerCard({
           </h3>
         </div>
         <div className="text-right">
-          <span className="font-mono text-xs font-bold text-emerald-400 block">
+          <span className="font-sans tabular-nums text-xs font-bold text-emerald-400 block">
             {currentTime || "00:00:00 WIB"}
           </span>
           <span className="text-[10px] text-slate-500">Waktu Indonesia Barat</span>
@@ -102,7 +102,7 @@ export function WorkTimerCard({
             : "Belum Melakukan Check-In Hari Ini"}
         </span>
 
-        <div className="text-4xl sm:text-5xl font-black font-mono tracking-tight text-slate-900 dark:text-slate-100 flex items-center justify-center gap-1">
+        <div className="text-4xl sm:text-5xl font-black font-sans tabular-nums tracking-tight text-slate-900 dark:text-slate-100 flex items-center justify-center gap-1">
           <span>{String(hours).padStart(2, "0")}</span>
           <span className="text-emerald-500 animate-pulse">:</span>
           <span>{String(minutes).padStart(2, "0")}</span>
@@ -112,7 +112,7 @@ export function WorkTimerCard({
 
         {/* Progress Towards 8-Hour Goal */}
         <div className="space-y-1 max-w-xs mx-auto pt-1">
-          <div className="flex justify-between text-[10px] font-mono text-slate-500">
+          <div className="flex justify-between text-[10px] font-sans tabular-nums text-slate-500">
             <span>Target: {targetHours} Jam</span>
             <span>{progressPct.toFixed(0)}%</span>
           </div>

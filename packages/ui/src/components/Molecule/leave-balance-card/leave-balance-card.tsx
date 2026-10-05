@@ -100,7 +100,7 @@ export function LeaveBalanceCard({
                 <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">
                   {item.name}
                 </span>
-                <span className={cn("text-[10px] font-mono font-bold px-2 py-0.5 rounded border", styles.badge)}>
+                <span className={cn("text-[10px] font-sans tabular-nums font-bold px-2 py-0.5 rounded border", styles.badge)}>
                   Sisa {item.remaining} Hari
                 </span>
               </div>
@@ -113,7 +113,7 @@ export function LeaveBalanceCard({
                 />
               </div>
 
-              <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 pt-0.5">
+              <div className="flex items-center justify-between text-[10px] font-sans tabular-nums text-slate-500 pt-0.5">
                 <span>Terpakai: {item.used} hari</span>
                 <span>Total: {item.total} hari</span>
               </div>

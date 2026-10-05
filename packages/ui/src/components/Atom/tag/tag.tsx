@@ -22,7 +22,7 @@ export function Tag({ variant = "muted", className, children, ...props }: TagPro
   return (
     <span
       className={cn(
-        "font-mono text-[11px] uppercase tracking-wider px-2 py-0.5 rounded-sm border bg-transparent inline-flex items-center gap-1 font-medium leading-tight",
+        "font-sans tabular-nums text-[11px] uppercase tracking-wider px-2 py-0.5 rounded-sm border bg-transparent inline-flex items-center gap-1 font-medium leading-tight",
         tagVariants[variant],
         className
       )}

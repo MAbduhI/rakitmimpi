@@ -70,7 +70,7 @@ export function CustomSelect({
             {selectedOption ? selectedOption.label : placeholder}
           </span>
           {selectedOption?.badge && (
-            <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/30">
+            <span className="text-[9px] font-sans tabular-nums px-1.5 py-0.2 rounded bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/30">
               {selectedOption.badge}
             </span>
           )}
@@ -125,14 +125,14 @@ export function CustomSelect({
                     <div className="truncate">
                       <div className="truncate text-xs">{opt.label}</div>
                       {opt.sublabel && (
-                        <div className="text-[10px] text-slate-400 font-mono truncate">{opt.sublabel}</div>
+                        <div className="text-[10px] text-slate-400 font-sans tabular-nums truncate">{opt.sublabel}</div>
                       )}
                     </div>
                   </div>
 
                   <div className="flex items-center gap-1.5 shrink-0">
                     {opt.badge && (
-                      <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-400">
+                      <span className="text-[9px] font-sans tabular-nums px-1.5 py-0.2 rounded bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-400">
                         {opt.badge}
                       </span>
                     )}

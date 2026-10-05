@@ -237,7 +237,7 @@ export function NineBoxMatrix({
                     </p>
                   </div>
                   <span
-                    className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-sm border ${cfg.badgeBg} ${cfg.badgeText}`}
+                    className={`text-[10px] font-sans tabular-nums font-bold px-2 py-0.5 rounded-sm border ${cfg.badgeBg} ${cfg.badgeText}`}
                   >
                     {emps.length}
                   </span>
@@ -264,14 +264,14 @@ export function NineBoxMatrix({
                             <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 block truncate">
                               {emp.name}
                             </span>
-                            <span className="text-[10px] text-slate-500 font-mono block">
+                            <span className="text-[10px] text-slate-500 font-sans tabular-nums block">
                               {emp.position}
                             </span>
                           </div>
                         </div>
 
                         <div className="text-right shrink-0">
-                          <span className="text-[10px] font-mono font-semibold text-slate-500 dark:text-slate-400">
+                          <span className="text-[10px] font-sans tabular-nums font-semibold text-slate-500 dark:text-slate-400">
                             X:{emp.performance_score} Y:{emp.potential_score}
                           </span>
                         </div>
@@ -299,7 +299,7 @@ export function NineBoxMatrix({
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-md max-w-md w-full shadow-2xl space-y-4">
             <div className="flex items-start justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
               <div>
-                <span className="text-xs font-mono font-semibold text-emerald-600 dark:text-emerald-400">
+                <span className="text-xs font-sans tabular-nums font-semibold text-emerald-600 dark:text-emerald-400">
                   {selectedEmp.nik} • {selectedEmp.department}
                 </span>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mt-0.5">
@@ -319,25 +319,25 @@ export function NineBoxMatrix({
             <div className="grid grid-cols-2 gap-2 text-xs">
               <div className="p-2.5 rounded-md bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
                 <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Skor Kinerja (X)</span>
-                <span className="text-base font-mono font-bold text-emerald-600 dark:text-emerald-400">
+                <span className="text-base font-sans tabular-nums font-bold text-emerald-600 dark:text-emerald-400">
                   {selectedEmp.performance_score}/100
                 </span>
               </div>
               <div className="p-2.5 rounded-md bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
                 <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Skor Potensi (Y)</span>
-                <span className="text-base font-mono font-bold text-cyan-600 dark:text-cyan-400">
+                <span className="text-base font-sans tabular-nums font-bold text-cyan-600 dark:text-cyan-400">
                   {selectedEmp.potential_score}/100
                 </span>
               </div>
               <div className="p-2.5 rounded-md bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
                 <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Total Hadir</span>
-                <span className="font-mono font-bold text-slate-800 dark:text-slate-200">
+                <span className="font-sans tabular-nums font-bold text-slate-800 dark:text-slate-200">
                   {selectedEmp.total_attendances} Hari
                 </span>
               </div>
               <div className="p-2.5 rounded-md bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
                 <span className="text-slate-500 dark:text-slate-400 block text-[10px]">Jumlah Terlambat</span>
-                <span className={`font-mono font-bold ${selectedEmp.late_count > 0 ? "text-amber-600 dark:text-amber-400" : "text-slate-800 dark:text-slate-200"}`}>
+                <span className={`font-sans tabular-nums font-bold ${selectedEmp.late_count > 0 ? "text-amber-600 dark:text-amber-400" : "text-slate-800 dark:text-slate-200"}`}>
                   {selectedEmp.late_count} Kali
                 </span>
               </div>

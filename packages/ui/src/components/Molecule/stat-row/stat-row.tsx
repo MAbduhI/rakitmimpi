@@ -27,7 +27,7 @@ export function StatRow({ items, className, ...props }: StatRowProps) {
       {items.map((it, idx) => (
         <div key={it.id || idx} className="p-4 sm:p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between gap-1 mb-1">
-            <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground font-medium">
+            <span className="font-sans tabular-nums text-[11px] uppercase tracking-wider text-muted-foreground font-medium">
               {it.label}
             </span>
             {it.icon}
@@ -44,7 +44,7 @@ export function StatRow({ items, className, ...props }: StatRowProps) {
             {it.change && <div>{it.change}</div>}
           </div>
           {it.subtext && (
-            <div className="text-[11px] text-muted-foreground mt-1.5 font-mono">
+            <div className="text-[11px] text-muted-foreground mt-1.5 font-sans tabular-nums">
               {it.subtext}
             </div>
           )}

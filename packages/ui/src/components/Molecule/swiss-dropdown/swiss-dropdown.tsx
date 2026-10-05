@@ -166,7 +166,7 @@ export function SwissSelect({
                 </span>
                 <div className="flex items-center gap-2">
                   {o.meta && (
-                    <span className="font-mono text-[11px] text-muted-foreground">
+                    <span className="font-sans tabular-nums text-[11px] text-muted-foreground">
                       {o.meta}
                     </span>
                   )}
@@ -273,7 +273,7 @@ export function SwissMenu({
               >
                 <span>{it.label}</span>
                 {it.hint && (
-                  <span className="font-mono text-[10px] text-muted-foreground">
+                  <span className="font-sans tabular-nums text-[10px] text-muted-foreground">
                     {it.hint}
                   </span>
                 )}

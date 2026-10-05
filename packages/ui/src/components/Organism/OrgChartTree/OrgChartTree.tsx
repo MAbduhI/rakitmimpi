@@ -129,14 +129,14 @@ export function OrgChartTree({
               </div>
             </div>
 
-            <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/60 shrink-0">
+            <span className="text-[9px] font-sans tabular-nums px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/60 shrink-0">
               {node.job_level}
             </span>
           </div>
 
           {/* Footer Card */}
           <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[10px]">
-            <span className="font-mono text-slate-500">{node.nik}</span>
+            <span className="font-sans tabular-nums text-slate-500">{node.nik}</span>
             <span className="font-medium text-emerald-400/90">{node.department}</span>
           </div>
 

@@ -71,7 +71,7 @@ export function PendingApprovalsCard({
           <span className="text-base"></span>
           <h3 className="font-bold text-sm text-slate-100">{title}</h3>
           {items.length > 0 && (
-            <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
+            <span className="px-2 py-0.5 rounded-full text-[10px] font-sans tabular-nums font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
               {items.length} Pending
             </span>
           )}
@@ -115,12 +115,12 @@ export function PendingApprovalsCard({
                       <span className="text-xs font-bold text-slate-100 truncate">
                         {item.employeeName}
                       </span>
-                      <span className="text-[10px] font-mono text-slate-500">
+                      <span className="text-[10px] font-sans tabular-nums text-slate-500">
                         {item.employeeNik}
                       </span>
                       <span
                         className={cn(
-                          "text-[9px] font-mono font-bold px-1.5 py-0.5 rounded border",
+                          "text-[9px] font-sans tabular-nums font-bold px-1.5 py-0.5 rounded border",
                           cfg.badge
                         )}
                       >
@@ -140,7 +140,7 @@ export function PendingApprovalsCard({
                 {/* Amount & Actions */}
                 <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
                   {item.amountOrDays && (
-                    <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-sm border border-emerald-500/20 mr-1">
+                    <span className="text-xs font-sans tabular-nums font-bold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-sm border border-emerald-500/20 mr-1">
                       {item.amountOrDays}
                     </span>
                   )}

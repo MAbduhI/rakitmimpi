@@ -1,4 +1,49 @@
 export {
+  cubicBezier,
+  type EasingFunction,
+  easings,
+  resolveEasing,
+  type SpringOptions,
+  spring,
+  steps,
+} from "./animation/easing";
+export {
+  useAnimate,
+  useInViewAnimate,
+  useSpring,
+  useTimeline,
+} from "./animation/hooks";
+export {
+  type StaggerFunction,
+  type StaggerOptions,
+  stagger,
+} from "./animation/stagger";
+export { type MotionPoint, motionPath, setDashoffset } from "./animation/svg";
+export {
+  createTimeline,
+  Timeline as AnimationTimeline,
+  type TimelineParams as AnimationTimelineParams,
+} from "./animation/timeline";
+// ─── ANIMATION ENGINE & MOTION PRIMITIVES (ANIME.JS PARITY) ──────────────────
+export {
+  AnimationInstance,
+  type AnimationParams,
+  type AnimationTarget,
+  animate,
+} from "./animation/tween";
+export {
+  getPresetVariant,
+  type MotionProperties,
+  type MotionVariant,
+  motionPresets,
+  type PresetName,
+  type TransitionConfig,
+} from "./animation/variants";
+export {
+  AnimateNumber,
+  type AnimateNumberProps,
+} from "./components/Atom/animate-number";
+export {
   Avatar,
   AvatarGroup,
   type AvatarGroupProps,
@@ -31,6 +76,14 @@ export { Input, type InputProps } from "./components/Atom/input";
 export { Kbd, type KbdProps } from "./components/Atom/kbd";
 export { Label, type LabelProps } from "./components/Atom/label";
 export { Loading, type LoadingProps, type LoadingVariant } from "./components/Atom/loading";
+export { Magnetic, type MagneticProps } from "./components/Atom/magnetic";
+// Atoms & Molecules
+export {
+  Motion,
+  type MotionBaseProps,
+  MotionComponent,
+  type MotionProps,
+} from "./components/Atom/motion";
 export {
   getPageRange,
   type PageSlot,
@@ -50,9 +103,14 @@ export { Radio, RadioGroup, type RadioGroupProps, type RadioProps, type RadioSiz
 export { ScrollArea, type ScrollAreaProps } from "./components/Atom/scroll-area";
 export { Select, type SelectOption, type SelectProps } from "./components/Atom/select";
 export { Skeleton, type SkeletonProps } from "./components/Atom/skeleton";
+export { SvgDraw, type SvgDrawProps } from "./components/Atom/svg-draw";
 export { Switch, type SwitchProps, type SwitchSize } from "./components/Atom/switch";
 export { Textarea, type TextareaProps } from "./components/Atom/textarea";
 export { Alert, type AlertProps, type AlertVariant } from "./components/Molecule/alert";
+export {
+  AnimatePresence,
+  type AnimatePresenceProps,
+} from "./components/Molecule/animate-presence";
 export { Breadcrumb, type BreadcrumbItem, type BreadcrumbProps } from "./components/Molecule/breadcrumb";
 export {
   addMonths,
@@ -84,6 +142,12 @@ export {
   type CollapseItem,
   type CollapseProps,
 } from "./components/Molecule/collapse";
+export * from "./components/Molecule/combobox";
+export {
+  CustomSelect,
+  type CustomSelectProps,
+  type CustomSelectOption,
+} from "./components/Molecule/custom-select/custom-select";
 export { EmptyState, type EmptyStateProps } from "./components/Molecule/empty-state";
 export {
   Progress,
@@ -107,6 +171,10 @@ export {
   type RunBannerProps,
   type RunBannerSize,
 } from "./components/Molecule/run-banner";
+export {
+  StaggerList,
+  type StaggerListProps,
+} from "./components/Molecule/stagger-list";
 export {
   Tab,
   type TabProps,
@@ -214,3 +282,49 @@ export {
 } from "./theme";
 export { cn } from "./utils/cn";
 export { type DebouncedFunction, debounce } from "./utils/debouncer";
+
+// ─── ENTERPRISE HR & DASHBOARD SUITE (SMARTHR / HRNEXUS) ───────────────────
+export { MetricStatCard, type MetricStatCardProps, type MetricStatVariant } from "./components/Molecule/metric-stat-card";
+export { PunctualityDonut, type PunctualityDonutProps } from "./components/Molecule/punctuality-donut";
+export { WorkTimerCard, type WorkTimerCardProps } from "./components/Molecule/work-timer-card";
+export { LeaveBalanceCard, type LeaveBalanceCardProps, type LeaveItemBalance } from "./components/Molecule/leave-balance-card";
+export { NineBoxMatrix, type NineBoxMatrixProps, type NineBoxEmployee } from "./components/Organism/NineBoxMatrix";
+export { OrgChartTree, type OrgChartTreeProps, type OrgNode } from "./components/Organism/OrgChartTree";
+export { NotesWorkspace, type NotesWorkspaceProps, type NoteItem } from "./components/Organism/notes-workspace";
+export { PendingApprovalsCard, type PendingApprovalsCardProps, type PendingApprovalItem, type ApprovalType } from "./components/Molecule/pending-approvals-card";
+export { UpcomingEventsCard, type UpcomingEventsCardProps, type ScheduleEventItem, type EventCategory } from "./components/Molecule/upcoming-events-card";
+export { EmployeeDistributionCard, type EmployeeDistributionCardProps, type StatusSegment, type DepartmentShare } from "./components/Molecule/employee-distribution-card";
+
+// ─── NEW TEMPLATE ENRICHMENT COMPONENTS ──────────────────────────────────────
+export { Rating, type RatingProps } from "./components/Atom/rating";
+export {
+  SegmentedControl,
+  type SegmentedControlProps,
+  type SegmentedControlOption,
+} from "./components/Atom/segmented-control";
+export { Dropzone, type DropzoneProps } from "./components/Molecule/dropzone";
+export {
+  FilterChips,
+  type FilterChipsProps,
+  type FilterChipItem,
+} from "./components/Molecule/filter-chips";
+export {
+  StatWidget,
+  type StatWidgetProps,
+} from "./components/Molecule/stat-widget";
+export {
+  Stepper,
+  type StepperProps,
+  type StepItem,
+} from "./components/Organism/stepper";
+export { Tag, type TagProps, type TagVariant } from "./components/Atom/tag";
+export { StatRow, type StatRowProps, type StatRowItem } from "./components/Molecule/stat-row";
+export {
+  SwissSelect,
+  SwissMenu,
+  useDropdown,
+  type SwissSelectOption,
+  type SwissSelectProps,
+  type SwissMenuItem,
+  type SwissMenuProps,
+} from "./components/Molecule/swiss-dropdown";

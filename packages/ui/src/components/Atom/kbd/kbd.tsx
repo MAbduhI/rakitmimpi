@@ -3,7 +3,7 @@ import type { HTMLAttributes } from "react";
 import { cn } from "../../../utils";
 
 const kbdVariants = cva(
-  "inline-flex select-none items-center justify-center rounded border border-border border-b-2 bg-surface-alt font-medium font-mono text-secondary",
+  "inline-flex select-none items-center justify-center rounded border border-border border-b-2 bg-surface-alt font-medium font-sans tabular-nums text-secondary",
   {
     variants: {
       size: {

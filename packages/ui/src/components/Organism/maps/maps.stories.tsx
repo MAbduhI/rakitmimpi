@@ -183,3 +183,41 @@ const customLayers: Array<CustomTileLayer> = [
 export const CustomLayers: Story = {
   args: { markers, customLayers, tileLayer: "carto-dark" },
 };
+
+/** Live tracking vehicle markers with rotation heading and directional rotated shadows. */
+export const LiveTrackingVehicles: Story = {
+  args: {
+    tileLayer: "carto-dark",
+    markers: [
+      {
+        id: "truck-01",
+        coordinates: [-6.2088, 106.8456],
+        icon: "truck-delivery",
+        iconOptions: {
+          size: 36,
+          color: "#38bdf8",
+          bgColor: "#0f172a",
+          border: "2px solid #38bdf8",
+          heading: 45,
+          rotateShadow: true,
+        },
+        legend: { label: "Unit Fleet BAP-01 (Speed 62 km/h • Heading 45° NE)", show: true },
+        popup: { content: "<strong>Fleet 01</strong><br/>Heading: 45° NE<br/>Speed: 62 km/h" },
+      },
+      {
+        id: "truck-02",
+        coordinates: [-6.1851, 106.8372],
+        icon: "navigation",
+        iconOptions: {
+          size: 32,
+          color: "#10b981",
+          bgColor: "#0f172a",
+          border: "2px solid #10b981",
+          heading: 135,
+          rotateShadow: { distance: 8, blur: 10, color: "rgba(16,185,129,0.4)" },
+        },
+        legend: { label: "Courier Motor BAP-09 (Heading 135° SE)", show: true },
+      },
+    ],
+  },
+};

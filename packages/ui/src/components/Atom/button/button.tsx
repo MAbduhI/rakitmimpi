@@ -16,13 +16,24 @@ const buttonVariants = cva(
         soft: "bg-accent/10 text-accent hover:bg-accent/20 active:bg-accent/25 border border-transparent",
         "soft-destructive": "bg-error/10 text-error hover:bg-error/20 active:bg-error/25 border border-transparent",
         "soft-success": "bg-success/10 text-success hover:bg-success/20 active:bg-success/25 border border-transparent",
-        "soft-warning": "bg-warning/15 text-warning-foreground hover:bg-warning/25 active:bg-warning/30 border border-transparent",
-        gradient: "bg-gradient-to-r from-accent to-accent-secondary text-accent-foreground shadow-sm hover:opacity-95 active:opacity-90",
+        "soft-warning":
+          "bg-warning/15 text-warning-foreground hover:bg-warning/25 active:bg-warning/30 border border-transparent",
+        gradient:
+          "bg-gradient-to-r from-accent to-accent-secondary text-accent-foreground shadow-sm hover:opacity-95 active:opacity-90",
         link: "text-accent underline-offset-4 hover:underline p-0 h-auto font-normal",
-        dashed: "border border-dashed border-input bg-transparent text-primary hover:bg-surface-alt/100 active:bg-surface-alt/80",
+        dashed:
+          "border border-dashed border-input bg-transparent text-primary hover:bg-surface-alt/100 active:bg-surface-alt/80",
         flush: "border-0 bg-transparent text-primary p-0 h-auto hover:text-accent",
-        vermilion: "bg-[var(--primary,#e2411b)] text-[var(--primary-foreground,#fff8f3)] hover:opacity-90 active:opacity-95 font-semibold rounded-sm shadow-xs border-0",
-        "swiss-secondary": "border border-border bg-card text-foreground hover:bg-muted active:bg-muted/80 rounded-sm font-medium shadow-none",
+        vermilion:
+          "bg-[var(--primary,#e2411b)] text-[var(--primary-foreground,#fff8f3)] hover:opacity-90 active:opacity-95 font-semibold rounded-sm shadow-xs border-0",
+        "swiss-secondary":
+          "border border-border bg-card text-foreground hover:bg-muted active:bg-muted/80 rounded-sm font-medium shadow-none",
+        nordic:
+          "bg-[#21252B] hover:bg-[#282C34] active:bg-[#181A1F] text-[#ECEFF4] border border-[#282C34] rounded-sm font-medium",
+        "nordic-primary":
+          "bg-[#61AFEF] hover:bg-[#4d9fe3] active:bg-[#398ed5] text-[#14171D] font-semibold rounded-sm border-0 shadow-xs",
+        "nordic-destructive":
+          "bg-[#E06C75]/15 hover:bg-[#E06C75]/25 active:bg-[#E06C75]/30 text-[#E06C75] border border-[#E06C75]/30 rounded-sm font-medium",
       },
       size: {
         xs: "h-7 px-2.5 text-xs rounded-sm",
@@ -73,7 +84,11 @@ export function Button({
       type={type}
       {...props}
     >
-      {loading ? <Loading size={size === "sm" || size === "xs" || size === "icon-xs" ? "sm" : "md"} variant={loadingType} /> : children}
+      {loading ? (
+        <Loading size={size === "sm" || size === "xs" || size === "icon-xs" ? "sm" : "md"} variant={loadingType} />
+      ) : (
+        children
+      )}
     </button>
   );
 }

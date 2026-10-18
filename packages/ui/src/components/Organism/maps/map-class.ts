@@ -46,6 +46,9 @@ function createIconFromReactIcon(
     borderRadius?: string;
     boxShadow?: string;
     fontWeight?: string;
+    heading?: number;
+    rotate?: number;
+    rotateShadow?: boolean | { angle?: number; distance?: number; blur?: number; color?: string };
   } = {},
 ): L.DivIcon {
   const {
@@ -59,7 +62,28 @@ function createIconFromReactIcon(
     className = "custom-marker-icon",
     iconAnchor = [size / 2, size],
     popupAnchor = [0, -size],
+    heading,
+    rotate,
+    rotateShadow,
   } = options;
+
+  const deg = heading ?? rotate ?? 0;
+  const hasRotation = heading !== undefined || rotate !== undefined;
+
+  let activeShadow = boxShadow;
+  if (rotateShadow) {
+    const shadowAngle = typeof rotateShadow === "object" && rotateShadow.angle !== undefined ? rotateShadow.angle : deg;
+    const dist = typeof rotateShadow === "object" && rotateShadow.distance !== undefined ? rotateShadow.distance : 6;
+    const blur = typeof rotateShadow === "object" && rotateShadow.blur !== undefined ? rotateShadow.blur : 8;
+    const shadowColor =
+      typeof rotateShadow === "object" && rotateShadow.color ? rotateShadow.color : "rgba(0,0,0,0.35)";
+
+    const rad = (shadowAngle * Math.PI) / 180;
+    const shadowX = Math.round(-Math.sin(rad) * dist);
+    const shadowY = Math.round(Math.cos(rad) * dist);
+    activeShadow = `${shadowX}px ${shadowY}px ${blur}px ${shadowColor}`;
+  }
+
   /*
    * `icon` is either a registry name or raw SVG markup. `id` is the part that
    * is safe to interpolate into the attribute and class below — dropping raw
@@ -67,6 +91,8 @@ function createIconFromReactIcon(
    * class name containing the whole document.
    */
   const { markup, id } = resolveMarkerIcon(iconType, { size: Math.floor(size * 0.6), color });
+
+  const rotationTransform = hasRotation ? `rotate(${deg}deg)` : "";
 
   const iconHtml = `
         <div class="hyperscal-marker-icon" style="
@@ -79,15 +105,17 @@ function createIconFromReactIcon(
             background: ${bgColor};
             border: ${border};
             border-radius: ${borderRadius};
-            box-shadow: ${boxShadow};
+            box-shadow: ${activeShadow};
             font-size: ${Math.floor(size * 0.6)}px;
             font-weight: ${fontWeight};
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transform: ${rotationTransform};
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         "
         data-icon="${id}"
-        onmouseover="this.style.transform='scale(1.1)'"
-        onmouseout="this.style.transform='scale(1)'">
+        data-heading="${deg}"
+        onmouseover="this.style.transform='${rotationTransform} scale(1.1)'"
+        onmouseout="this.style.transform='${rotationTransform}'">
             ${markup}
         </div>
     `;
@@ -145,6 +173,14 @@ interface CustomIconOptions {
   className?: string;
   iconAnchor?: [number, number];
   popupAnchor?: [number, number];
+  bgColor?: string;
+  border?: string;
+  borderRadius?: string;
+  boxShadow?: string;
+  fontWeight?: string;
+  heading?: number;
+  rotate?: number;
+  rotateShadow?: boolean | { angle?: number; distance?: number; blur?: number; color?: string };
 }
 
 interface CustomLegendOptions extends L.TooltipOptions {
@@ -267,6 +303,7 @@ interface MapClassType {
   hasMarker: (id: string) => boolean;
   getAllMarkers: () => Map<string, MarkerData>;
   updateMarker: (id: string, coordinates: L.LatLngExpression, options?: MarkerOptions) => boolean;
+  updateMarkerHeading: (id: string, heading: number, rotateShadow?: boolean) => boolean;
   toggleMarker: (id: string, visible: boolean) => boolean;
   fitToMarkers: (padding?: number) => void;
   fitToSpecificMarkers: (ids: Array<string>, padding?: number) => void;
@@ -330,6 +367,9 @@ interface MarkerInput {
     borderRadius?: string;
     boxShadow?: string;
     fontWeight?: string;
+    heading?: number;
+    rotate?: number;
+    rotateShadow?: boolean | { angle?: number; distance?: number; blur?: number; color?: string };
   };
   legend?: { label: string; show: boolean } & L.TooltipOptions;
   popup?: CustomPopupOptions;
@@ -1510,6 +1550,28 @@ class MapClass extends L.Map {
         }
       }
 
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Update marker heading angle and rotated directional shadow for live tracking
+   */
+  public updateMarkerHeading(id: string, heading: number, rotateShadow = true): boolean {
+    const markerData = this.markers.get(id);
+    if (!markerData) return false;
+    const markerElement = markerData.marker.getElement();
+    const iconElement = markerElement?.querySelector(".hyperscal-marker-icon") as HTMLElement | null;
+    if (iconElement) {
+      iconElement.style.transform = `rotate(${heading}deg)`;
+      iconElement.setAttribute("data-heading", String(heading));
+      if (rotateShadow) {
+        const rad = (heading * Math.PI) / 180;
+        const shadowX = Math.round(-Math.sin(rad) * 6);
+        const shadowY = Math.round(Math.cos(rad) * 6);
+        iconElement.style.boxShadow = `${shadowX}px ${shadowY}px 8px rgba(0,0,0,0.35)`;
+      }
       return true;
     }
     return false;

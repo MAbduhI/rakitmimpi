@@ -20,6 +20,6 @@ describe("Kbd", () => {
 
   it("merges className", () => {
     render(<Kbd className="text-accent">K</Kbd>);
-    expect(screen.getByText("K")).toHaveClass("text-accent", "font-mono");
+    expect(screen.getByText("K")).toHaveClass("text-accent", "font-sans tabular-nums");
   });
 });

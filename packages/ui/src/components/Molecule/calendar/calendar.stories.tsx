@@ -155,3 +155,20 @@ export const CustomHeader: Story = {
     ),
   },
 };
+
+/** `size="fill"` expands to fill 100% of the parent container or card width. */
+export const SizeFill: Story = {
+  render: () => (
+    <div className="w-full max-w-xl rounded-lg border border-border bg-surface-alt/30 p-4">
+      <h4 className="mb-3 font-semibold text-sm">Container Fill Width</h4>
+      <Calendar defaultMonth={AUGUST} size="fill" />
+    </div>
+  ),
+};
+
+export const SizeSmall: Story = {
+  args: {
+    defaultMonth: AUGUST,
+    size: "sm",
+  },
+};

@@ -50,7 +50,7 @@ export const ServerError: Story = {
     subTitle: "Something broke on our side. The team has been notified.",
     extra: <Button>Try again</Button>,
     children: (
-      <pre className="overflow-x-auto rounded-md border border-border bg-surface-alt p-3 text-secondary text-xs">
+      <pre className="overflow-x-auto rounded-sm border border-border bg-surface-alt p-3 text-secondary text-xs">
         ref: 7f3c9a1e — 2026-08-14T09:12:04Z
       </pre>
     ),

@@ -148,13 +148,25 @@ export function Pagination(props: PaginationProps) {
         <Icon name="chevron-left" size="sm" />
       </Button>
 
-      {getPageRange(current, totalPages, props.siblingCount).map((slot) =>
-        typeof slot === "number" ? (
+      {getPageRange(current, totalPages, props.siblingCount).map((slot) => {
+        if (typeof slot !== "number") {
+          return (
+            <span key={slot} aria-hidden className="px-1 text-secondary text-sm">
+              …
+            </span>
+          );
+        }
+
+        const digitCount = String(slot).length;
+        const digitPadding =
+          digitCount === 1 ? "px-1.5" : digitCount === 2 ? "px-1" : digitCount === 3 ? "px-0.5" : "px-0";
+
+        return (
           <Button
             key={slot}
             aria-current={slot === current ? "page" : undefined}
             aria-label={`Page ${slot}`}
-            className="aspect-square p-0 tabular-nums"
+            className={cn("aspect-square py-0 tabular-nums", digitPadding)}
             disabled={disabled}
             onClick={() => go(slot)}
             size={size}
@@ -162,12 +174,8 @@ export function Pagination(props: PaginationProps) {
           >
             {slot}
           </Button>
-        ) : (
-          <span key={slot} aria-hidden className="px-1 text-secondary text-sm">
-            …
-          </span>
-        ),
-      )}
+        );
+      })}
 
       <Button
         aria-label="Next page"

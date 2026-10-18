@@ -46,6 +46,14 @@ interface CalendarBaseProps extends Omit<HTMLAttributes<HTMLDivElement>, "onSele
   /** Adds year jump buttons either side of the month arrows. */
   showYearNav?: boolean;
   footer?: ReactNode;
+  /**
+   * Calendar size and width behaviour.
+   * - `sm`: compact layout (size-7 day cells)
+   * - `md`: standard fixed layout (size-9 day cells)
+   * - `lg`: large layout (size-11 day cells)
+   * - `fill`: fluid full-width table layout adapting to parent container width
+   */
+  size?: "sm" | "md" | "lg" | "fill";
 }
 
 export interface CalendarSingleProps extends CalendarBaseProps {
@@ -91,6 +99,7 @@ export function Calendar(props: CalendarProps) {
     renderHeader,
     showYearNav = false,
     footer,
+    size = "md",
     className,
     ...rest
   } = props;
@@ -235,7 +244,17 @@ export function Calendar(props: CalendarProps) {
 
   return (
     <div
-      className={cn("w-fit rounded-md border border-border bg-surface p-3 text-primary", className)}
+      className={cn(
+        "rounded-md border border-border bg-surface text-primary",
+        size === "fill"
+          ? "w-full p-4"
+          : size === "sm"
+            ? "w-fit p-2 text-xs"
+            : size === "lg"
+              ? "w-fit p-4 text-base"
+              : "w-fit p-3 text-sm",
+        className,
+      )}
       // `rest` is a union of both members' leftovers; every member extends
       // HTMLAttributes, so the widening is sound and TS just cannot see it.
       {...(rest as HTMLAttributes<HTMLDivElement>)}
@@ -298,7 +317,7 @@ export function Calendar(props: CalendarProps) {
         onGridKeyDown either way; `grid`/`gridcell` would only change how it is
         announced, and it requires suppressing three a11y lints to say it.
       */}
-      <table className="border-collapse" onKeyDown={onGridKeyDown}>
+      <table className={cn("border-collapse", size === "fill" && "w-full table-fixed")} onKeyDown={onGridKeyDown}>
         <thead>
           <tr>
             {showWeekNumbers ? <th className="w-8" /> : null}
@@ -363,7 +382,11 @@ export function Calendar(props: CalendarProps) {
                         aria-current={isSameDay(date, today) ? "date" : undefined}
                         aria-pressed={selected}
                         className={cn(
-                          "flex size-9 flex-col items-center justify-center rounded-md text-sm tabular-nums transition-colors",
+                          "flex flex-col items-center justify-center rounded-md tabular-nums transition-colors",
+                          size === "fill" && "h-10 w-full text-sm",
+                          size === "sm" && "size-7 text-xs",
+                          size === "md" && "size-9 text-sm",
+                          size === "lg" && "size-11 text-base",
                           "focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-[-2px]",
                           "disabled:pointer-events-none disabled:opacity-30",
                           cellRender && "size-auto min-h-14 w-full justify-start gap-0.5 p-1",

@@ -20,6 +20,7 @@ export interface SidebarItem {
   badge?: ReactNode;
   disabled?: boolean;
   onSelect?: () => void;
+  children?: Array<SidebarItem>;
 }
 
 export interface SidebarProps extends Omit<HTMLAttributes<HTMLElement>, "onSelect" | "children"> {
@@ -42,9 +43,11 @@ export interface SidebarProps extends Omit<HTMLAttributes<HTMLElement>, "onSelec
   /** Free-form content below the items. */
   children?: ReactNode;
   title?: string;
+  variant?: "default" | "swiss";
 }
 
 const WIDTH = "w-64";
+const SWISS_WIDTH = "w-[240px]";
 const RAIL = "w-16";
 
 export function Sidebar({
@@ -62,43 +65,118 @@ export function Sidebar({
   footer,
   children,
   title = "Navigation",
+  variant = "default",
   className,
   ...props
 }: SidebarProps) {
   const [internalCollapsed, setInternalCollapsed] = useState(collapsed);
   const isMini = mode === "mini";
+  const isSwiss = variant === "swiss";
   // Controlled as soon as a handler is supplied, like the other components here.
   const railed = isMini && (onCollapsedChange ? collapsed : internalCollapsed);
+
+  const [expanded, setExpanded] = useState<Record<string, boolean>>(() => {
+    const initial: Record<string, boolean> = {};
+    for (const item of items) {
+      if (item.children?.some((child) => child.value === value)) {
+        initial[item.value] = true;
+      }
+    }
+    return initial;
+  });
+
+  const toggleExpand = (val: string) => {
+    setExpanded((prev) => ({ ...prev, [val]: !prev[val] }));
+  };
 
   const nav = (
     <nav aria-label={title} className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto p-2">
       {items.map((item) => {
-        const active = item.value === value;
+        const hasChildren = Boolean(item.children && item.children.length > 0);
+        const isChildActive = item.children?.some((c) => c.value === value);
+        const active = item.value === value || isChildActive;
+        const isExpanded = Boolean(expanded[item.value]);
+
         return (
-          <button
-            key={item.value}
-            aria-current={active ? "page" : undefined}
-            className={cn(
-              "flex items-center gap-3 rounded-md px-3 py-2 text-left text-sm transition-colors focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-[-2px] disabled:cursor-not-allowed disabled:opacity-50",
-              active ? "bg-accent text-accent-foreground" : "text-secondary hover:bg-surface-alt hover:text-primary",
-              railed && "justify-center px-0",
+          <div key={item.value} className="flex flex-col">
+            <button
+              aria-current={active ? "page" : undefined}
+              className={cn(
+                "flex items-center gap-3 px-3 py-2 text-left text-xs transition-colors focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-[-2px] disabled:cursor-not-allowed disabled:opacity-50",
+                isSwiss
+                  ? active && !hasChildren
+                    ? "bg-foreground text-background font-semibold rounded-sm"
+                    : active && hasChildren
+                    ? "text-foreground font-semibold bg-muted/60 rounded-sm"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground font-normal rounded-sm"
+                  : active
+                    ? "bg-accent text-accent-foreground rounded-md text-sm font-medium"
+                    : "text-secondary hover:bg-surface-alt hover:text-primary rounded-md text-sm font-medium",
+                railed && "justify-center px-0",
+              )}
+              disabled={item.disabled}
+              onClick={() => {
+                if (hasChildren && !railed) {
+                  toggleExpand(item.value);
+                }
+                item.onSelect?.();
+                onSelect?.(item);
+              }}
+              title={railed && typeof item.label === "string" ? item.label : undefined}
+              type="button"
+            >
+              {item.icon ? <Icon className="shrink-0" name={item.icon} size={isSwiss ? "sm" : "md"} /> : null}
+              {railed ? null : (
+                <>
+                  <span className="flex-1 truncate">{item.label}</span>
+                  {item.badge}
+                  {hasChildren && (
+                    <Icon
+                      name="chevron-down"
+                      size="sm"
+                      className={cn(
+                        "shrink-0 transition-transform duration-200 text-muted-foreground",
+                        isExpanded && "rotate-180"
+                      )}
+                    />
+                  )}
+                </>
+              )}
+            </button>
+
+            {hasChildren && !railed && isExpanded && (
+              <div className="flex flex-col gap-0.5 pt-0.5 pl-6">
+                {item.children?.map((sub) => {
+                  const subActive = sub.value === value;
+                  return (
+                    <button
+                      key={sub.value}
+                      aria-current={subActive ? "page" : undefined}
+                      className={cn(
+                        "flex items-center justify-between px-3 py-1.5 text-left text-xs transition-colors focus-visible:outline-2 focus-visible:outline-ring rounded-sm",
+                        isSwiss
+                          ? subActive
+                            ? "bg-foreground text-background font-semibold"
+                            : "text-muted-foreground hover:bg-muted hover:text-foreground font-normal"
+                          : subActive
+                            ? "bg-accent/80 text-accent-foreground font-medium"
+                            : "text-secondary hover:bg-surface-alt hover:text-primary font-normal"
+                      )}
+                      disabled={sub.disabled}
+                      onClick={() => {
+                        sub.onSelect?.();
+                        onSelect?.(sub);
+                      }}
+                      type="button"
+                    >
+                      <span className="truncate">{sub.label}</span>
+                      {sub.badge}
+                    </button>
+                  );
+                })}
+              </div>
             )}
-            disabled={item.disabled}
-            onClick={() => {
-              item.onSelect?.();
-              onSelect?.(item);
-            }}
-            title={railed && typeof item.label === "string" ? item.label : undefined}
-            type="button"
-          >
-            {item.icon ? <Icon className="shrink-0" name={item.icon} size="md" /> : null}
-            {railed ? null : (
-              <>
-                <span className="flex-1 truncate">{item.label}</span>
-                {item.badge}
-              </>
-            )}
-          </button>
+          </div>
         );
       })}
       {railed ? null : children}
@@ -148,7 +226,10 @@ export function Sidebar({
     );
   }
 
-  const shared = "flex flex-col bg-surface text-primary";
+  const shared = isSwiss
+    ? "flex flex-col bg-card text-foreground"
+    : "flex flex-col bg-surface text-primary";
+  const effectiveWidth = isSwiss ? SWISS_WIDTH : WIDTH;
 
   if (mode === "floating") {
     return (
@@ -156,8 +237,8 @@ export function Sidebar({
         aria-label={title}
         className={cn(
           shared,
-          WIDTH,
-          "fixed top-4 bottom-4 z-40 rounded-md border border-border shadow-lg",
+          effectiveWidth,
+          "fixed top-4 bottom-4 z-40 rounded-sm border border-border shadow-lg",
           side === "left" ? "left-4" : "right-4",
           className,
         )}
@@ -174,8 +255,8 @@ export function Sidebar({
         aria-label={title}
         className={cn(
           shared,
-          WIDTH,
-          "sticky max-h-[calc(100dvh-2rem)] shrink-0 self-start rounded-md border border-border",
+          effectiveWidth,
+          "sticky max-h-[calc(100dvh-2rem)] shrink-0 self-start rounded-sm border border-border",
           className,
         )}
         style={{ top: stickyTop }}
@@ -193,7 +274,7 @@ export function Sidebar({
       className={cn(
         shared,
         "h-full shrink-0 transition-[width] duration-200 motion-reduce:transition-none",
-        railed ? RAIL : WIDTH,
+        railed ? RAIL : effectiveWidth,
         side === "left" ? "border-border border-r" : "border-border border-l",
         className,
       )}

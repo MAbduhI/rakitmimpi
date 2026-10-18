@@ -33,7 +33,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const Panel = ({ label }: { label: string }) => (
-  <div className="rounded-md border border-border bg-surface px-4 py-3 text-primary text-sm shadow-lg">{label}</div>
+  <div className="rounded-sm border border-border bg-surface px-4 py-3 text-primary text-sm shadow-lg">{label}</div>
 );
 
 export const Default: Story = {
@@ -89,7 +89,7 @@ export const ChatPanel: Story = {
         <p className="font-medium text-primary text-sm">Support</p>
         <p className="text-secondary text-sm">Hi! How can we help with your order today?</p>
         <div className="flex justify-end">
-          <span className="rounded-md bg-accent px-3 py-1.5 text-accent-foreground text-xs">Start chat</span>
+          <span className="rounded-sm bg-accent px-3 py-1.5 text-accent-foreground text-xs">Start chat</span>
         </div>
       </div>
     </FlyContainer>
